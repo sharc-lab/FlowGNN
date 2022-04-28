@@ -1,0 +1,9 @@
+.ipcache
+.run
+.vscode
+_x*
+Golden_C_output.txt
+result
+*.log
+host
+*.run_summary

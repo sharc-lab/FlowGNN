@@ -1,0 +1,7 @@
+## to build the bitstream:
+make all TARGET=hw
+
+## to run on the board:
+make run TARGET=hw
+
+## the board name is hard coded in the makefile
