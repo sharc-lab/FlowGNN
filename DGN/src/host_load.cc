@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "dcl.h"
 #include "host.h"
 
 void load_weights()
@@ -161,7 +162,8 @@ void fetch_one_graph(
     int num_of_edges
 )
 {
-    printf("(%d/%d) Loading graph %s ...\n", g, NUM_GRAPHS, graph_name);
+    printf("(%d/%d) Loading graph %s ...\r", g, NUM_GRAPHS, graph_name);
+    fflush(stdout);
 
     FILE* f;
 

@@ -1,3 +1,4 @@
+#include "dcl.h"
 #include "host.h"
 
 aligned_vector<WT_TYPE> embedding_h_atom_embedding_list_weights(9 * 119 * 100);
@@ -10,8 +11,8 @@ aligned_vector<WT_TYPE> MLP_layer_FC_layers_1_bias_in(25);
 aligned_vector<WT_TYPE> MLP_layer_FC_layers_2_weight_in(1 * 25);
 aligned_vector<WT_TYPE> MLP_layer_FC_layers_2_bias_in(1);
 
-static const char* GRAPH_INFO_FORMAT = "../../../graphs/graph_info/g%d_info.txt";
-static const char* GRAPH_NAME_FORMAT = "../../../graphs/graph_bin/g%d";
+static const char* GRAPH_INFO_FORMAT = "../graphs/graph_info/g%d_info.txt";
+static const char* GRAPH_NAME_FORMAT = "../graphs/graph_bin/g%d";
 
 int main(int argc, char **argv) {
     if (argc != 2) {
@@ -145,6 +146,7 @@ int main(int argc, char **argv) {
 
         fetch_one_graph(g, graph_name, node_feature, node_eigen, edge_list, edge_attr, num_of_nodes, num_of_edges);
     }
+    printf("\n******* Graphs loading done *******\n");
 
     OCL_CHECK(err, cl::Buffer nums_of_nodes_buf(
         context,
@@ -208,13 +210,16 @@ int main(int argc, char **argv) {
     krnl_DGN_compute_graphs.setArg(idx++, MLP_layer_FC_layers_2_weight_in_buf);
     krnl_DGN_compute_graphs.setArg(idx++, MLP_layer_FC_layers_2_bias_in_buf);
 
+    printf("(0/%d) Computing DGN ...\r", NUM_TRIALS);
     for (int i = 0; i < NUM_TRIALS; i++)
     {
-        printf("(%d/%d) Computing DGN ...\n", i + 1, NUM_TRIALS);
+        printf("(%d/%d) Computing DGN ...\r", i + 1, NUM_TRIALS);
+        fflush(stdout);
         OCL_CHECK(err, err = q.enqueueTask(krnl_DGN_compute_graphs));
         OCL_CHECK(err, err = q.enqueueMigrateMemObjects({result_buf}, CL_MIGRATE_MEM_OBJECT_HOST));
         OCL_CHECK(err, err = q.finish());
     }
+    printf("\n******* Computation done *******\n");
 
     FILE* c_output = fopen("HLS_output.txt", "w+");
     for (int g = 1; g <= NUM_GRAPHS; g++) {
@@ -222,12 +227,7 @@ int main(int argc, char **argv) {
         int num_of_edges = nums_of_edges[g - 1];
         char graph_name[128];
         sprintf(graph_name, GRAPH_NAME_FORMAT, g);
-
-        printf("********** Graph %s *************\n", graph_name);
-        printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
-        printf("%.8f\n", float(result[g - 1]));
         fprintf(c_output, "g%d: %.8f\n", g, float(result[g - 1]));
-        printf("DGN computation done.\n");
     }
 
     return 0;

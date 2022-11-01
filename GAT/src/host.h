@@ -4,9 +4,10 @@
 #include <array>
 #include <ap_fixed.h>
 #include "xcl2.hpp"
+#include "dataset.hpp"
 
 // #region Model Parameters
-constexpr int MAX_EDGE = 500;
+constexpr int MAX_EDGE = 5500;
 constexpr int MAX_NODE = 500;
 constexpr int ND_FEATURE = 9;
 constexpr int ND_FEATURE_TOTAL = 173;
@@ -16,6 +17,14 @@ constexpr int EMB_DIM = 16;
 constexpr int NUM_HEADS = 4;
 constexpr int NUM_LAYERS = 5;
 constexpr int NUM_TASK = 1;
+// #endregion
+
+// #region Hardware Parameters
+constexpr int GATHER_PARALLEL = 8; // how many dimensions of EMB_DIM should a message passing PE process each cycle?
+constexpr int APPLY_PARALLEL = 1; // how many dimensions of EMB_DIM should the node embedding PE process each cycle?
+constexpr int NODE_PARALLEL = 2; // how many nodes should the node embedding PE process simultaneously?
+constexpr int EDGE_PARALLEL = 4; // how many message passing PEs are there?
+constexpr int MLP_PARALLEL = 2;
 // #endregion
 
 // #region Data Types
@@ -31,8 +40,7 @@ typedef struct {
 } edge_t;
 // #endregion
 
-constexpr int NUM_GRAPHS = 4113;
-constexpr int NUM_TRIALS = 100;
+constexpr int NUM_TRIALS = 25;
 
 template <typename T>
 using aligned_vector = std::vector<T, aligned_allocator<T>>;

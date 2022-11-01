@@ -12,8 +12,8 @@ aligned_vector<WT_TYPE> graph_mlp_3_weights_fixed(NUM_TASK * GRAPH_MLP_2_OUT);
 aligned_vector<WT_TYPE> graph_mlp_3_bias_fixed(NUM_TASK);
 aligned_vector<WT_TYPE> avg_deg_fixed(1);
 
-static const char* GRAPH_INFO_FORMAT = "../../../graphs/graph_info/g%d_info.txt";
-static const char* GRAPH_NAME_FORMAT = "../../../graphs/graph_bin/g%d";
+static const char* GRAPH_INFO_FORMAT = "../graphs/graph_info/g%d_info.txt";
+static const char* GRAPH_NAME_FORMAT = "../graphs/graph_bin/g%d";
 
 int main(int argc, char **argv) {
     if (argc != 2) {
@@ -141,6 +141,7 @@ int main(int argc, char **argv) {
 
         fetch_one_graph(g, graph_name, node_feature, edge_list, num_of_nodes, num_of_edges);
     }
+    printf("\n******* Graphs loading done *******\n");
 
     OCL_CHECK(err, cl::Buffer nums_of_nodes_buf(
         context,
@@ -198,13 +199,16 @@ int main(int argc, char **argv) {
     krnl_PNA_compute_graphs.setArg(idx++, graph_mlp_3_bias_buf);
     krnl_PNA_compute_graphs.setArg(idx++, avg_deg_buf);
 
+    printf("(0/%d) Computing PNA ...\r", NUM_TRIALS);
     for (int i = 0; i < NUM_TRIALS; i++)
     {
-        printf("(%d/%d) Computing PNA ...\n", i + 1, NUM_TRIALS);
+        printf("(%d/%d) Computing PNA ...\r", i + 1, NUM_TRIALS);
+        fflush(stdout);
         OCL_CHECK(err, err = q.enqueueTask(krnl_PNA_compute_graphs));
         OCL_CHECK(err, err = q.enqueueMigrateMemObjects({result_buf}, CL_MIGRATE_MEM_OBJECT_HOST));
         OCL_CHECK(err, err = q.finish());
     }
+    printf("\n******* Computation done *******\n");
 
     FILE* c_output = fopen("HLS_output.txt", "w+");
     for (int g = 1; g <= NUM_GRAPHS; g++) {
@@ -212,14 +216,9 @@ int main(int argc, char **argv) {
         int num_of_edges = nums_of_edges[g - 1];
         char graph_name[128];
         sprintf(graph_name, GRAPH_NAME_FORMAT, g);
-
-        printf("********** Graph %s *************\n", graph_name);
-        printf("# of nodes: %d, # of edges: %d\n", num_of_nodes, num_of_edges);
         for (int t = 0; t < NUM_TASK; t++) {
-            printf("%.8f\n", float(result[(g - 1) * NUM_TASK + t]));
             fprintf(c_output, "g%d: %.8f\n", g, float(result[(g - 1) * NUM_TASK + t]));
         }
-        printf("PNA computation done.\n");
     }
 
     return 0;

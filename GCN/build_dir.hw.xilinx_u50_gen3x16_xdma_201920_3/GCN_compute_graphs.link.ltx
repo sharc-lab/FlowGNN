@@ -1,0 +1,41 @@
+{
+    "ltx_root": {
+        "version": 4,
+        "minor": 0,
+        "ltx_data": [
+            {
+                "name": "EDA_PROBESET",
+                "active": true,
+                "debug_cores": [
+                    {
+                        "type": "XSDB_V3",
+                        "name": "level0_i/ulp/debug_bridge_xsdbm/inst/xsdbm",
+                        "spec": "labtools_xsdbm_v3",
+                        "reconfigTop": "level0_i/ulp",
+                        "clk_input_freq_hz": "50000000"
+                    },
+                    {
+                        "type": "XSDB_V3",
+                        "name": "level0_i/blp/blp_i/blp_cmp/inst/mgmt_debug_hub/inst/xsdbm",
+                        "spec": "labtools_xsdbm_v3",
+                        "clk_input_freq_hz": "50000000"
+                    },
+                    {
+                        "type": "XSDBS_V2",
+                        "name": "level0_i/blp/blp_i/blp_hif/inst/pcie/inst/debug_wrapper_U/jtag_axi4l_m_inst",
+                        "spec": "labtools_xsdbslavelib_v2",
+                        "ipName": "jtag_axi",
+                        "uuid": "F8AA5528649753AF87140EA282E8FC88"
+                    },
+                    {
+                        "type": "XSDBS_V2",
+                        "name": "level0_i/blp/blp_i/PLP/plp_cmp/inst/jtag_axi_master",
+                        "spec": "labtools_xsdbslavelib_v2",
+                        "ipName": "jtag_axi",
+                        "uuid": "3F4D2402C8AB53F88DD40476DEA2A21F"
+                    }
+                ]
+            }
+        ]
+    }
+}

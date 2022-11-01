@@ -1,0 +1,128 @@
+Profile Summary
+Generated on: 2022-08-01 17:41:27
+Msec since Epoch: 1659390087316
+Profiled application: host
+Target platform: Xilinx
+Tool version: 2021.1
+XRT build version: 2.12.427
+Build version branch: 2021.2
+Build version hash: 2719b6027e185000fc49783171631db03fc0ef79
+Build version date: N/A
+Target devices: 
+Flow mode: System Run
+
+OpenCL API Calls
+API Name,Number Of Calls,Total Time (ms),Minimum Time (ms),Average Time (ms),Maximum Time (ms),
+clCreateBuffer,12,4.85335,0.013951,0.404445,1.99459,
+clCreateCommandQueue,1,0.012787,0.012787,0.012787,0.012787,
+clCreateContext,1,183.846,183.846,183.846,183.846,
+clCreateKernel,1,95.8502,95.8502,95.8502,95.8502,
+clCreateProgramWithBinary,1,3220.24,3220.24,3220.24,3220.24,
+clEnqueueMigrateMemObjects,100,1.03841,0.005417,0.010384,0.061597,
+clEnqueueTask,100,164.167,0.086473,1.64167,150.795,
+clFinish,100,54412.8,543.757,544.128,555.919,
+clGetDeviceIDs,5,0.097574,0.00178,0.0195148,0.080714,
+clGetDeviceInfo,2,17.1376,0.005244,8.5688,17.1324,
+clGetExtensionFunctionAddress,2,0.030525,0.005011,0.0152625,0.025514,
+clGetExtensionFunctionAddressForPlatform,2,0.015923,0.002051,0.0079615,0.013872,
+clGetPlatformInfo,6,0.019133,0.001129,0.00318883,0.01114,
+clReleaseCommandQueue,1,0.009511,0.009511,0.009511,0.009511,
+clReleaseContext,1,67.4881,67.4881,67.4881,67.4881,
+clReleaseDevice,5,0.015458,0.001297,0.0030916,0.005408,
+clReleaseKernel,1,8.98047,8.98047,8.98047,8.98047,
+clReleaseMemObject,212,0.560226,0.000972,0.00264258,0.034595,
+clReleaseProgram,1,0.006576,0.006576,0.006576,0.006576,
+clRetainDevice,5,0.017506,0.000885,0.0035012,0.008894,
+clRetainMemObject,200,0.707537,0.000869,0.00353769,0.079913,
+clSetKernelArg,13,0.173778,0.001632,0.0133675,0.075604,
+
+Kernel Execution
+Kernel,Number Of Enqueues,Total Time (ms),Minimum Time (ms),Average Time (ms),Maximum Time (ms),
+GAT_compute_graphs,100,54376.6,543.651,543.766,543.887,
+
+Top Kernel Execution
+Kernel Instance Address,Kernel,Context ID,Command Queue ID,Device,Start Time (ms),Duration (ms),Global Work Size,Local Work Size,
+94778433775888,GAT_compute_graphs,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,23727.9,543.887,1:1:1,1:1:1,
+94778433775888,GAT_compute_graphs,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,35701.4,543.836,1:1:1,1:1:1,
+94778433775888,GAT_compute_graphs,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,18829.6,543.835,1:1:1,1:1:1,
+94778433775888,GAT_compute_graphs,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,30258.9,543.831,1:1:1,1:1:1,
+94778433775888,GAT_compute_graphs,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,29170.4,543.83,1:1:1,1:1:1,
+94778433775888,GAT_compute_graphs,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,22639.4,543.826,1:1:1,1:1:1,
+94778433775888,GAT_compute_graphs,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,60736.6,543.825,1:1:1,1:1:1,
+94778433775888,GAT_compute_graphs,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,46586.9,543.823,1:1:1,1:1:1,
+94778433775888,GAT_compute_graphs,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,52573.6,543.821,1:1:1,1:1:1,
+94778433775888,GAT_compute_graphs,0,0,xilinx_u50_gen3x16_xdma_201920_3-0,43865.6,543.82,1:1:1,1:1:1,
+
+Top Memory Writes: Host to Global Memory
+Buffer Address,Context ID,Command Queue ID,Start Time (ms),Duration (ms),Buffer Size (KB),Writing Rate(MB/s),
+94208,0,0,14463.4,12.0443,80711.5,972112,
+
+Top Memory Reads: Host to Global Memory
+Buffer Address,Context ID,Command Queue ID,Start Time (ms),Duration (ms),Buffer Size (KB),Reading Rate(MB/s),
+221184,0,0,54206,0.27554,20,5.5108,
+221184,0,0,54750.3,0.268203,20,5.36406,
+221184,0,0,46586.4,0.262319,20,5.24638,
+221184,0,0,39510.8,0.261236,20,5.22472,
+221184,0,0,19917.7,0.259001,20,5.18002,
+221184,0,0,40055.1,0.254539,20,5.09078,
+221184,0,0,51484.7,0.254264,20,5.08528,
+221184,0,0,43320.9,0.253303,20,5.06606,
+221184,0,0,42232.3,0.252032,20,5.04064,
+221184,0,0,60736.2,0.251655,20,5.0331,
+
+Guidance Parameters
+Parameter,Element,Value,
+PLRAM_DEVICE,all,0,
+HBM_DEVICE,all,0,
+KDMA_DEVICE,all,0,
+P2P_DEVICE,all,0,
+TRACE_MEMORY,all,FIFO,
+APPLICATION_RUN_TIME_MS,all,69266.3,
+MIGRATE_MEM,host,100,
+P2P_HOST_TRANSFERS,host,0,
+OBJECTS_RELEASED,all,1,
+CU_CONTEXT_EN,all,0,
+MAX_PARALLEL_KERNEL_ENQUEUES,GAT_compute_graphs,1,
+COMMAND_QUEUE_OOO,94778421885760,0,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|nums_of_nodes|HBM[0]|1,40000,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|nums_of_edges|HBM[0]|1,40000,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|reload_weights|HBM[0]|1,40000,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|out_r|HBM[0]|1,20000,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|node_feature_in|HBM[0]|1,17687592,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|edge_list_in|HBM[0]|1,62820672,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|scoring_fn_target_in|HBM[0]|1,640,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|scoring_fn_source_in|HBM[0]|1,640,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|linear_proj_weights_in|HBM[0]|1,40960,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|skip_proj_weights_in|HBM[0]|1,40960,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|graph_pred_weights_in|HBM[0]|1,32,
+KERNEL_BUFFER_INFO,GAT_compute_graphs|graph_pred_bias_in|HBM[0]|1,2,
+BUFFER_RD_ACTIVE_TIME_MS,all,18.3754,
+BUFFER_WR_ACTIVE_TIME_MS,all,12.0443,
+BUFFER_TX_ACTIVE_TIME_MS,all,54436.6,
+TOTAL_KERNEL_RUN_TIME_MS,all,0,
+XRT_INI_SETTING,profile,0,Profiling (deprecated)
+XRT_INI_SETTING,opencl_summary,1,Generation of OpenCL summary report
+XRT_INI_SETTING,opencl_device_counter,0,Hardware counters added to OpenCL summary file
+XRT_INI_SETTING,timeline_trace,1,Timeline trace (deprecated)
+XRT_INI_SETTING,native_xrt_trace,0,Generation of Native XRT API function trace
+XRT_INI_SETTING,xrt_trace,0,Generation of hardware SHIM function trace
+XRT_INI_SETTING,xrt_profile,0,Equivalent to xrt_trace (deprecated)
+XRT_INI_SETTING,data_transfer_trace,off,Collection of data from PL monitors and added to summary and trace
+XRT_INI_SETTING,power_profile,0,Polling of power data during execution of application
+XRT_INI_SETTING,power_profile_interval_ms,20,Interval for reading power data (in ms)
+XRT_INI_SETTING,stall_trace,off,Enables hardware generation of stalls in compute units
+XRT_INI_SETTING,trace_buffer_size,1M,Size of buffer to allocate for trace (memory offload only)
+XRT_INI_SETTING,verbosity,4,Verbosity level
+XRT_INI_SETTING,continuous_trace,0,Continuous offloading of trace from memory to host
+XRT_INI_SETTING,continuous_trace_interval_ms,10,Interval for offloading trace (in ms; deprecated)
+XRT_INI_SETTING,trace_buffer_offload_interval_ms,10,Interval for reading of device data to host (in ms)
+XRT_INI_SETTING,lop_trace,0,Generation of lower overhead OpenCL trace. Should not be used with other OpenCL options.
+XRT_INI_SETTING,debug_mode,batch,Debug mode (emulation only)
+XRT_INI_SETTING,aie_trace,0,Generation of AI Engine trace
+XRT_INI_SETTING,aie_trace_buffer_size,8M,Size of buffer to allocate for AI Engine trace
+XRT_INI_SETTING,aie_trace_metrics,functions,Configuration level used for AI Engine trace
+XRT_INI_SETTING,aie_profile,0,Generation of AI Engine profiling
+XRT_INI_SETTING,aie_profile_interval_us,1000,Interval for reading AI Engine profile counters (in us)
+XRT_INI_SETTING,aie_profile_core_metrics,heat_map,Metric set for AI Engine core modules
+XRT_INI_SETTING,aie_profile_memory_metrics,conflicts,Metric set for AI Engine memory modules
+XRT_INI_SETTING,vitis_ai_profile,0,Generation of Vitis AI summary and trace (Vitis AI designs only)

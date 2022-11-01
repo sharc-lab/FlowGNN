@@ -90,6 +90,7 @@ endif
 ############################## Setting up Host Variables ##############################
 #Include Required Host Source Files
 CXXFLAGS += -I$(XF_PROJ_ROOT)/../common/includes/xcl2
+CXXFLAGS += -I$(XF_PROJ_ROOT)/../common/includes/dataset
 HOST_SRCS += $(XF_PROJ_ROOT)/../common/includes/xcl2/xcl2.cpp
 HOST_SRCS += ./src/host.cc
 HOST_SRCS += ./src/host_load.cc

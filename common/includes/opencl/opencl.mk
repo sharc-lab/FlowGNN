@@ -10,6 +10,7 @@ ifneq ($(HOST_ARCH), x86)
 endif
 
 VIVADO_INCLUDE:= $(XILINX_VIVADO)/include
-opencl_CXXFLAGS=-I$(OPENCL_INCLUDE) -I$(VIVADO_INCLUDE)
+HLS_INCLUDE:= $(XILINX_HLS)/include
+opencl_CXXFLAGS=-I$(OPENCL_INCLUDE) -I$(HLS_INCLUDE)
 OPENCL_LIB:= $(xrt_path)/lib
 opencl_LDFLAGS=-L$(OPENCL_LIB) -lOpenCL -lpthread 

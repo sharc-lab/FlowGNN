@@ -7,3 +7,5 @@ result
 *.log
 host
 *.run_summary
+*.csv
+HLS_output.txt
